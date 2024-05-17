@@ -40,25 +40,17 @@ def main():
             data, _ = get_table_data(session, table)
             print("Original data:", data)  # Debug print
 
-            try:
-                filtered_data = [{col: row[col] for col in columns if col in row.keys()} for row in data]
-                print("Filtered data:", filtered_data)  # Debug print
-            except Exception as e:
-                print(f"Error filtering data: {e}")
-                for row in data:
-                    print("Row data:", row)
-                    for col in columns:
-                        print(f"Column '{col}':", row.get(col, "Column not found"))
-                return
+            filtered_data = [{col: row[col] for col in columns if col in row.keys()} for row in data]
+            print("Filtered data:", filtered_data)  # Debug print
 
             summary = summarize_data(filtered_data, columns)
             visual_paths = []
 
             for column in columns:
                 if column in db_info[table]:
-                    path = os.path.join(output_dir, f'{table}_{column}_histogram.png')
-                    create_histogram(filtered_data, column, table)
-                    visual_paths.append(path)
+                    path = create_histogram(filtered_data, column, table)
+                    if path:
+                        visual_paths.append(path)
 
             generate_report({table: summary}, {table: visual_paths})
             print("Report generated successfully!")

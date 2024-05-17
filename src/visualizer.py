@@ -10,7 +10,7 @@ def create_histogram(data, column, table_name):
 
     column_data = [row[column] for row in data if row[column] is not None and not isinstance(row[column], UUID)]
     if not column_data:
-        return
+        return None
 
     first_elem = column_data[0]
     if isinstance(first_elem, bool):
@@ -27,3 +27,4 @@ def create_histogram(data, column, table_name):
     file_path = os.path.join(output_dir, f'{table_name}_{column}_histogram.png')
     plt.savefig(file_path)
     plt.close()
+    return file_path
