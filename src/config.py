@@ -9,3 +9,5 @@ DATABASE_URL = os.getenv('DATABASE_URL')
 
 # Load the OpenAI API key
 OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
+
+CSV_FILE_PATH = os.getenv('CSV_FILE_PATH')
