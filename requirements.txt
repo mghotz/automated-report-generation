@@ -1,0 +1,6 @@
+pandas
+matplotlib
+fpdf
+sqlalchemy
+psycopg2-binary  # For PostgreSQL integration
+python-dotenv
